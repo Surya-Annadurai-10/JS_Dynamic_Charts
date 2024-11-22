@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Charts</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <style>
+        .canvs{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="canvs">
+        <canvas id = "myChart"></canvas>
+    </div>
+
+
+
+    <script>
+let chart;
+ chart = new Chart(
+    document.getElementById('myChart'),
+    {
+      type: 'line',
+      
+      options: {
+        scales : {
+            x : {
+                type : 'linear',
+                position : 'bottom',
+                title : {
+                    display : true,
+                    text : "Time"
+                }
+            },
+            y : {
+                beginAtZero : true,
+                title :{
+                    display : true,
+                    text : 'value'
+                }
+            }
+        },
+        animation: true,
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            enabled: true
+          }
+        }
+      },
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'value',
+            data: [],
+            borderColor : 'red',
+            borderWidth : 1,
+            fill : true
+          }
+        ]
+      }
+    }
+  );
+
+
+  function addValues(){
+    let newNum = Math.random() * 100
+    console.log(newNum);
+  chart.data.labels.push(chart.data.labels.length);
+    chart.data.datasets[0].data.push(newNum);
+
+   chart.update();
+  }
+  setInterval(addValues, 1000);
+    </script>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
